@@ -1,6 +1,7 @@
 import * as React from 'react';
 export interface ToggleHookOptions {
     extraCloseAction?: () => void;
+    extraOpenAction?: () => void;
 }
 
 export interface IToggleItem {
@@ -76,22 +77,35 @@ export const ToggleProvider: React.FC<ToggleProviderProps> = ({ children }) => {
 
 export const useToggleContext = <T,>(key: string, otp?: ToggleHookOptions) => {
     const context = React.useContext(ToggleContext);
-    const [isFireAction, setIsFireAction] = React.useState(false);
+    const [isFireCloseAction, setIsFireCloseAction] = React.useState(false);
+    const [isFireOpenAction, setIsFireOpenAction] = React.useState(false);
 
-    const open = (value?: T) => context.handleOpenToggle(key, value);
+    const open = (value?: T) => {
+        if (!context.isOpen(key)) {
+            context.handleOpenToggle(key, value);
+            setIsFireOpenAction(true);
+        }
+    };
     const close = () => {
         if (context.isOpen(key)) {
             context.handleCloseToggle(key);
-            setIsFireAction(true);
+            setIsFireCloseAction(true);
         }
     };
 
     React.useEffect(() => {
-        if (isFireAction) {
+        if (isFireCloseAction) {
             context.toggles[key]?.options?.extraCloseAction?.();
-            setIsFireAction(false);
+            setIsFireCloseAction(false);
         }
-    }, [isFireAction, context.toggles[key]]);
+    }, [isFireCloseAction, context.toggles[key]]);
+
+    React.useEffect(() => {
+        if (isFireOpenAction) {
+            context.toggles[key]?.options?.extraOpenAction?.();
+            setIsFireOpenAction(false);
+        }
+    }, [isFireOpenAction, context.toggles[key]]);
 
     React.useEffect(() => {
         if (!context.toggles[key]) {

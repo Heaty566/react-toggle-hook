@@ -1,30 +1,3 @@
-![npm](https://img.shields.io/npm/v/react-toggle-hook) ![npm](https://img.shields.io/npm/dw/react-toggle-hook) ![npm bundle size](https://img.shields.io/bundlephobia/min/react-toggle-hook)
-
-[![NPM](https://nodei.co/npm/react-toggle-hook.png)](https://nodei.co/npm/react-toggle-hook/)
-
-# react-toggle-hook
-
-A simple React hook to manage toggle state over multiple components easier and cleaner.
-
-## Installation
-
-NPM:
-
-```sh
-npm install react-toggle-hook
-```
-
-Yarn:
-
-```sh
-yarn add react-toggle-hook
-```
-
-## Usage
-
-```jsx
-// example/example1.tsx
-
 import * as React from 'react';
 import { ToggleProvider, useToggleContext } from 'react-toggle-hook';
 import { useQuery } from 'react-query';
@@ -75,9 +48,3 @@ const App: React.FC<any> = () => {
 };
 
 export default App;
-
-```
-
-## License
-
-MIT
