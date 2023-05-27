@@ -1,7 +1,7 @@
 {
     "name": "react-toggle-hook",
-    "version": "0.0.1-alpha",
-    "description": "A component library",
+    "version": "1.0.0",
+    "description": "A simple React hook to manage toggle state over multiple components easier and cleaner.",
     "main": "dist/cjs/index.js",
     "module": "dist/esm/index.js",
     "files": [
@@ -27,5 +27,6 @@
         "react": "^17.0.2",
         "react-dom": "^17.0.2"
     },
-    "dependencies": {}
+    "dependencies": {},
+    "repository": "https://github.com/Heaty566/react-toggle-hook.git"
 }
